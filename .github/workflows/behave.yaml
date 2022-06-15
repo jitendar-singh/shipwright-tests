@@ -1,0 +1,39 @@
+---
+name: behave
+
+on:
+  push:
+    tags-ignore:
+      - "**"
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  shipwright-tests:
+    name: Shipwright System Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: helm/kind-action@v1.2.0
+        with:
+          version: v0.14.0
+          cluster_name: kind
+          wait: 120s
+      - uses: otaviof/setup-shipwright@v0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Test Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --editable .
+
+      - name: Shipwright System Tests
+        run: |
+          behave
