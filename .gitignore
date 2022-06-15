@@ -13,3 +13,5 @@ parts/
 sdist/
 var/
 venv/
+_output
+kubeconfig
