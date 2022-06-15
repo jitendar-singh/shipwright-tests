@@ -9,5 +9,6 @@ setup(
 	install_requires=[
 		'behave==1.2.6',
 		'kubernetes==23.6.0',
+		'pyshould'
 	],
 )
