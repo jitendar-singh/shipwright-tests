@@ -1,4 +1,3 @@
-
 from behave import given, then, when, step
 
 @given(u'the Kubernetes cluster is available')
@@ -9,16 +8,10 @@ def probe_cluster_available(context):
 def probe_deployment_state(context, deployment, state, namespace):
 	pass
 
-@then(u'we check namespace/shipwright-build should be created')
-def step_impl(context):
-   pass
+@then(u'the following resource names belong to "{api_version}" API version')
+def probe_resources_for_apiversion(context, api_version):
+	pass
 
-
-@then(u'we check that the following resources are created')
-def step_impl(context):
-    pass
-
-
-@then(u'check the following clusterbuildstrategy.shipwright.io/ are installed')
-def step_impl(context):
-    pass
+@then(u'the following "{name}" objects are present')
+def probe_cluster_objects(context, name):
+	pass

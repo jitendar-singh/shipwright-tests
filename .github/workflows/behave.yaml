@@ -31,9 +31,12 @@ jobs:
 
       - name: Install Test Dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install --editable .
+          make pip-install
+
+      - name: Unit Tests
+        run: |
+          make test
 
       - name: Shipwright System Tests
         run: |
-          behave
+          make behave
