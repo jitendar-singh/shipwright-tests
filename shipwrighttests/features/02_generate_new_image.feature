@@ -1,15 +1,6 @@
 Feature: Build container images for nodejs app using "buildpacks-v3" and "clusterbuildstrategies"
- 
- With Shipwright, developers get a simplified approach for building container images, by defining
- a minimal YAML that does not require any previous knowledge of containers or container tooling. 
- All you need is your source code in git and access to a container registry.
- 
- Shipwright supports any tool that can build container images in Kubernetes clusters, such as:
-
- Kaniko
- Cloud Native Buildpacks
- BuildKit
- Buildah
+    Validate building of container image for a nodejs app using "buildpacks-v3" 
+    and "clusterbuildstrategies" and pushing the image to a container registry.
 
 Scenario: Build container images for nodejs app using buildpacks-v3
 Given The following "clusterbuildstrategies.shipwright.io" objects are present:
@@ -20,6 +11,6 @@ Given The following "clusterbuildstrategies.shipwright.io" objects are present:
        | kaniko          |
        | ko              |
        | source-to-image |
-Then We generate a secret to access our container registry, such as one on Docker Hub or Quay.io:
-And We create a custom build object
-And We create a buildrun for the build
+Then the user generates a secret to access our container registry, such as one on Docker Hub or Quay.io:
+And the user creates a custom build object
+And the user creates a buildrun for the build

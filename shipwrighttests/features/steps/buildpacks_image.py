@@ -2,7 +2,7 @@ from kubernetes import client, config
 from kubernetes.client.exceptions import ApiException
 from resources import ResourcesModel
 
-@then(u'We generate a secret to access our container registry, such as one on Docker Hub or Quay.io:')
+@then(u'the user generates a secret to access our container registry, such as one on Docker Hub or Quay.io:')
 def generate_secret(context):
     """Create a new secret
 
@@ -27,7 +27,7 @@ def generate_secret(context):
     secret = v1.read_namespaced_secret('test-pull-secret', namespace='default')
     print('Secret: %s' %secret.metadata.name,' created')
 
-@then(u'We create a custom build object')
+@then(u'the user creates a custom build object')
 def create_crd(context):
     """Create namespaced custom objects Build
 
@@ -58,7 +58,7 @@ def create_crd(context):
         if ex.status != 404:
             raise
 
-@then(u'We create a buildrun for the build')
+@then(u'the user creates a buildrun for the build')
 def create_buildrun(context):
     """Create namespaced custom objects BuildRun
 
