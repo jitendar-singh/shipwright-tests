@@ -29,4 +29,3 @@ class ResourcesModel(object):
         cstobj = client.CustomObjectsApi()
         res = cstobj.get_cluster_custom_object('shipwright.io', 'v1alpha1', 'clusterbuildstrategies', self.object_name)
         return res["metadata"]["name"]
-        

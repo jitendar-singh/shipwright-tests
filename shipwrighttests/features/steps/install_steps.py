@@ -84,6 +84,7 @@ def probe_resources_for_apiversion(context, api_version):
 		res = context.model.get_crd_scope(row["resource_name"])
 		assert_that(row["scope"],equal_to(res))
 
+@given(u'the following "{name}" objects are present')
 @then(u'the following "{name}" objects are present')
 def probe_cluster_objects(context, name):
 	"""Probe the availability of custom objects created by CustomResourceDefinitions
