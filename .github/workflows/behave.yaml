@@ -66,7 +66,6 @@ jobs:
 
       - name: CRDA Scan
         id: scan
-        uses: ./
         with:
           manifest_file: go.mod
           crda_key: "db9ce8e2-ee13-4e2a-ace0-34cc4f0178f9"
