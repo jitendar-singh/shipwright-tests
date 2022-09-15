@@ -47,8 +47,8 @@ def create_crd(context):
             "kind": "ClusterBuildStrategy"
         },
         "output":{
-            "image": "quay.io/sunnyconcise/sample-nodejs:latest",
-            "credentials": {"name": "test-pull-secret"}
+            "image": "registry.registry.svc.cluster.local:32222/samples/sample-nodejs:latest"
+            # "credentials": {"name": "test-pull-secret"}
             }
        })
     custobjapi = client.CustomObjectsApi()
