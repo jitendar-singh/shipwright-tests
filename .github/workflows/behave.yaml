@@ -63,6 +63,9 @@ jobs:
           source: github
           crda: "latest"
           github_pat: ${{ github.token }}
+      
+      - name: List
+        run: ls -la
 
       - name: CRDA Scan
         id: scan
