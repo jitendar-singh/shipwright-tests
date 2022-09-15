@@ -17,7 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+        with:
+          token: ${{ secrets.SHIPTOKEN }}
       - uses: helm/kind-action@v1.2.0
         with:
           version: v0.14.0
@@ -32,6 +33,13 @@ jobs:
       - name: Install Test Dependencies
         run: |
           make pip-install
+      
+      - name: Install CRDA
+        uses: redhat-actions/openshift-tools-installer@v1
+        with:
+          source: github
+          crda: "latest"
+          github_pat: ${{ github.token }}
 
       - name: Unit Tests
         run: |
@@ -40,3 +48,40 @@ jobs:
       - name: Shipwright System Tests
         run: |
           make behave
+      
+      - name: CRDA Scan
+        id: scan
+        uses: redhat-actions/crda@v1
+        with:
+          manifest_file: go.mod
+          crda_key: "db9ce8e2-ee13-4e2a-ace0-34cc4f0178f9"
+          # snyk_token: ${{ secrets.SNYK_TOKEN }}
+          fail_on: never
+      
+      - name: Print JSON analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_json }}
+        run: cat ${{ steps.scan.outputs.crda_report_json }}
+
+      - name: Print SARIF analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
+        run: cat ${{ steps.scan.outputs.crda_report_sarif }}
+
+      - name: Print Report Link
+        run: echo ${{ steps.scan.outputs.report_link }}
+
+      - name: Print Artifact Name
+        run: echo ${{ steps.scan.outputs.artifact_name }}
+  
+      - name: Print JSON analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_json }}
+        run: cat ${{ steps.scan.outputs.crda_report_json }}
+
+      - name: Print SARIF analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
+        run: cat ${{ steps.scan.outputs.crda_report_sarif }}
+
+      - name: Print Report Link
+        run: echo ${{ steps.scan.outputs.report_link }}
+
+      - name: Print Artifact Name
+        run: echo ${{ steps.scan.outputs.artifact_name }}
