@@ -53,7 +53,7 @@ jobs:
         id: scan
         uses: redhat-actions/crda@v1
         with:
-          manifest_file: go.mod
+          manifest_file: requirements.txt
           crda_key: "db9ce8e2-ee13-4e2a-ace0-34cc4f0178f9"
           # snyk_token: ${{ secrets.SNYK_TOKEN }}
           fail_on: never
