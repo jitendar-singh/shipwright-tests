@@ -2,4 +2,4 @@ behave==1.2.6
 pyshould==0.7.1
 kubernetes==23.6.0
 pytest==7.1.2
-utllib3==1.10.3
+utllib3==1.26.7
