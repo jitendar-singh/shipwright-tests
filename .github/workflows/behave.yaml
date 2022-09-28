@@ -34,12 +34,12 @@ jobs:
         run: |
           make pip-install
       
-      # - name: Install CRDA
-      #   uses: redhat-actions/openshift-tools-installer@v1
-      #   with:
-      #     source: github
-      #     crda: "latest"
-      #     github_path: ${{ github.token }}
+      - name: Install CRDA
+        uses: redhat-actions/openshift-tools-installer@v1
+        with:
+          source: github
+          crda: "latest"
+          github_path: ${{ github.token }}
 
       - name: Unit Tests
         run: |
@@ -72,16 +72,16 @@ jobs:
       - name: Print Artifact Name
         run: echo ${{ steps.scan.outputs.artifact_name }}
   
-      # - name: Print JSON analysis report
-      #   if: ${{ always() && steps.scan.outputs.crda_report_json }}
-      #   run: cat ${{ steps.scan.outputs.crda_report_json }}
+      - name: Print JSON analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_json }}
+        run: cat ${{ steps.scan.outputs.crda_report_json }}
 
-      # - name: Print SARIF analysis report
-      #   if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
-      #   run: cat ${{ steps.scan.outputs.crda_report_sarif }}
+      - name: Print SARIF analysis report
+        if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
+        run: cat ${{ steps.scan.outputs.crda_report_sarif }}
 
-      # - name: Print Report Link
-      #   run: echo ${{ steps.scan.outputs.report_link }}
+      - name: Print Report Link
+        run: echo ${{ steps.scan.outputs.report_link }}
 
-      # - name: Print Artifact Name
-      #   run: echo ${{ steps.scan.outputs.artifact_name }}
+      - name: Print Artifact Name
+        run: echo ${{ steps.scan.outputs.artifact_name }}
