@@ -16,7 +16,7 @@ jobs:
     name: Shipwright System Testing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2.5.0
         with:
           token: ${{ secrets.SHIPTOKEN }}
       - uses: helm/kind-action@v1.2.0
