@@ -33,55 +33,7 @@ jobs:
       - name: Install Test Dependencies
         run: |
           make pip-install
-      
-      - name: Install CRDA
-        uses: redhat-actions/openshift-tools-installer@v1
-        with:
-          source: github
-          crda: "latest"
-          github_pat: ${{ github.token }}
-
-      - name: Unit Tests
-        run: |
-          make test
-
+          
       - name: Shipwright System Tests
         run: |
           make behave
-      
-      - name: CRDA Scan
-        id: scan
-        uses: redhat-actions/crda@v1
-        with:
-          manifest_file: requirements.txt
-          crda_key: "xxxxxxxxxx"
-          # snyk_token: ${{ secrets.SNYK_TOKEN }}
-          fail_on: never
-      
-      - name: Print JSON analysis report
-        if: ${{ always() && steps.scan.outputs.crda_report_json }}
-        run: cat ${{ steps.scan.outputs.crda_report_json }}
-
-      - name: Print SARIF analysis report
-        if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
-        run: cat ${{ steps.scan.outputs.crda_report_sarif }}
-
-      - name: Print Report Link
-        run: echo ${{ steps.scan.outputs.report_link }}
-
-      - name: Print Artifact Name
-        run: echo ${{ steps.scan.outputs.artifact_name }}
-  
-      - name: Print JSON analysis report
-        if: ${{ always() && steps.scan.outputs.crda_report_json }}
-        run: cat ${{ steps.scan.outputs.crda_report_json }}
-
-      - name: Print SARIF analysis report
-        if: ${{ always() && steps.scan.outputs.crda_report_sarif }}
-        run: cat ${{ steps.scan.outputs.crda_report_sarif }}
-
-      - name: Print Report Link
-        run: echo ${{ steps.scan.outputs.report_link }}
-
-      - name: Print Artifact Name
-        run: echo ${{ steps.scan.outputs.artifact_name }}

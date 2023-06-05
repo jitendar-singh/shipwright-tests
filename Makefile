@@ -25,6 +25,10 @@ unit-test:
 .PHONY: behave
 behave:
 	@source "$(ENV_DIR)/bin/activate"
+	"${ENV_DIR}"/bin/pip install -q -r requirements.txt
+	"${ENV_DIR}"/bin/behave --junit --junit-directory ./logs \
+                              --no-capture --no-capture-stderr \
+                              shipwrighttests/features"
 	behave
 
 .PHONY: clean
